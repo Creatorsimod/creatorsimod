@@ -1,0 +1,211 @@
+.footer {
+  background: #e9e2d3;;
+  color: #000;
+  margin-top: 80px;
+  font-family: var(--font-geist-sans);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* Logo Section */
+.logoSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+  filter: brightness(1.1);
+}
+
+/* Discord Section */
+.discordSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.discordTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: #1a1a1a;
+}
+
+.discordWidget {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Legal Section */
+.legalSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.legalColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.legalTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1a1a1a;
+  border-bottom: 2px solid #b95d18;
+  padding-bottom: 8px;
+}
+
+.legalLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legalLink {
+  color: #3b3a36;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 200ms ease;
+  line-height: 1.4;
+}
+
+.legalLink:hover {
+  color: #b95d18;
+}
+
+/* Bottom Bar */
+.bottom {
+  border-top: 1px solid #d4c5b0;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #3b3a36;
+}
+
+.compliance {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #3b3a36;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.complianceLink {
+  color: #b95d18;
+  text-decoration: none;
+  border-bottom: 1px solid #b95d18;
+}
+
+.complianceLink:hover {
+  color: #d47a2c;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 48px 32px;
+  }
+
+  .legalSection {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .logoSection {
+    order: 1;
+  }
+
+  .discordSection {
+    order: 2;
+  }
+
+  .iframe {
+    height: 400px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .footer {
+    margin-top: 48px;
+  }
+
+  .container {
+    padding: 32px 20px;
+    gap: 32px;
+  }
+
+  .logo {
+    width: 140px;
+  }
+
+  .discordTitle {
+    font-size: 1rem;
+  }
+
+  .discordWidget {
+    max-width: 100%;
+  }
+
+  .iframe {
+    height: 350px;
+  }
+
+  .legalSection {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .legalLink {
+    font-size: 0.9rem;
+  }
+
+  .bottom {
+    padding: 16px 20px;
+    gap: 12px;
+  }
+
+  .copyright {
+    font-size: 0.8rem;
+  }
+
+  .compliance {
+    font-size: 0.75rem;
+  }
+}

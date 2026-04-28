@@ -1,0 +1,165 @@
+.page {
+  min-height: 100vh;
+  background: #efe9db;
+  color: #3b3a36;
+  font-family: var(--font-geist-sans);
+  padding: 60px 40px;
+}
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.article {
+  background: #fff;
+  padding: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.article h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #b95d18;
+  margin: 0 0 48px;
+  letter-spacing: -0.02em;
+  font-style: italic;
+}
+
+.article h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 40px 0 16px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.article h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #3b3a36;
+  margin: 24px 0 12px;
+}
+
+.article section {
+  margin-bottom: 32px;
+}
+
+.article p {
+  line-height: 1.8;
+  margin: 0 0 16px;
+  color: #3b3a36;
+  font-size: 1rem;
+}
+
+.article ul {
+  margin: 0 0 16px 24px;
+  padding: 0;
+  list-style: disc;
+}
+
+.article li {
+  margin-bottom: 10px;
+  line-height: 1.7;
+  color: #3b3a36;
+}
+
+.article a {
+  color: #b95d18;
+  text-decoration: none;
+  border-bottom: 1px solid #b95d18;
+  transition: color 200ms ease;
+}
+
+.article a:hover {
+  color: #d47a2c;
+}
+
+.article strong {
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .page {
+    padding: 48px 24px;
+  }
+
+  .article {
+    padding: 40px 24px;
+  }
+
+  .article h1 {
+    font-size: 1.8rem;
+    margin-bottom: 32px;
+  }
+
+  .article h2 {
+    font-size: 1.2rem;
+    margin: 32px 0 12px;
+  }
+
+  .article h3 {
+    font-size: 1rem;
+    margin: 20px 0 10px;
+  }
+
+  .article ul {
+    margin-left: 20px;
+  }
+
+  .article li {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .page {
+    padding: 32px 16px;
+  }
+
+  .main {
+    max-width: 100%;
+  }
+
+  .article {
+    padding: 24px 16px;
+    border-radius: 6px;
+  }
+
+  .article h1 {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+
+  .article h2 {
+    font-size: 1.1rem;
+    margin: 24px 0 12px;
+  }
+
+  .article h3 {
+    font-size: 0.95rem;
+  }
+
+  .article p {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+
+  .article ul {
+    margin: 0 0 12px 18px;
+  }
+
+  .article li {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .article section {
+    margin-bottom: 24px;
+  }
+}

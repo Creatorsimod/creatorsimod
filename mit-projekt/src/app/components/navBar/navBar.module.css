@@ -1,0 +1,133 @@
+:root {
+  --bg: #e9e2d3;
+  --text: #3b3a36;
+  --muted: rgba(59,58,54,0.75);
+}
+
+.header {
+  background: var(--bg);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.navContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
+}
+
+.brand a {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.logo {
+  display: block;
+  width: 138px;
+  height: auto;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 44px;
+  align-items: center;
+}
+
+.navItem a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: color 150ms ease;
+}
+
+.navItem a:hover {
+  color: var(--muted);
+}
+
+.burger {
+  display: none;
+  position: absolute;
+  right: 20px;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.burger:focus { outline: 2px solid rgba(0,0,0,0.08); }
+
+.burgerBar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  margin: 4px 0;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .navContainer { justify-content: space-between; }
+  .navList {
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    gap: 0;
+    transform-origin: top;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 260ms ease;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    z-index: 1;
+  }
+
+  .navItem {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+  }
+
+  .navItem a {
+    display: block;
+    width: 100%;
+    padding: 18px 16px;
+    line-height: 1.2;
+  }
+
+  .burger { display: block; }
+
+  .open { max-height: 240px; }
+}
+
+/* Desktop spacing/tweak for centering like the image */
+@media (min-width: 769px) {
+  .navContainer { padding: 22px 24px; }
+  .brand { opacity: 1; pointer-events: auto; }
+  .navList { gap: 40px; }
+}

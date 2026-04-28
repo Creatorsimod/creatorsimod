@@ -1,0 +1,147 @@
+.page {
+  min-height: 100vh;
+  background: #efe9db;
+  color: #3b3a36;
+  font-family: var(--font-geist-sans);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  padding: 60px 40px;
+  max-width: 600px;
+}
+
+.title {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 800;
+  color: #b95d18;
+  margin: 0;
+  letter-spacing: -0.02em;
+  font-style: italic;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 200ms ease, opacity 200ms ease;
+  cursor: pointer;
+}
+
+.contactItem:hover {
+  transform: translateX(8px);
+  opacity: 0.8;
+}
+
+.iconBox {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #c19a6b;
+  flex-shrink: 0;
+  font-size: 28px;
+}
+
+.contactItem:first-child .iconBox {
+  background: #b95d18;
+}
+
+.contactItem:last-child .iconBox {
+  background: #5865f2;
+}
+
+.emailIcon,
+.discordIcon {
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactText {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .contactSection {
+    gap: 60px;
+    padding: 48px 32px;
+  }
+
+  .contactItem {
+    gap: 20px;
+  }
+
+  .iconBox {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .contactText {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .page {
+    min-height: auto;
+    padding: 60px 20px;
+  }
+
+  .contactSection {
+    gap: 48px;
+    padding: 40px 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .contactList {
+    gap: 24px;
+  }
+
+  .contactItem {
+    gap: 16px;
+  }
+
+  .iconBox {
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
+
+  .contactText {
+    font-size: 1rem;
+  }
+}
