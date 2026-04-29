@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styles from "./page.module.css"
 
 export default function BlivCreatorPage() {
@@ -11,6 +11,17 @@ export default function BlivCreatorPage() {
     contactInfo: "",
   })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const successTimerRef = useRef(null)
+
+  useEffect(() => {
+    return () => {
+      if (successTimerRef.current) {
+        window.clearTimeout(successTimerRef.current)
+      }
+    }
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -20,13 +31,28 @@ export default function BlivCreatorPage() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("Form data:", formData)
-    // TODO: Integrate with Resend later
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
+
+    setLoading(true)
+    setError("")
+
+    try {
+      const response = await fetch("/api/bliv-creator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        throw new Error(result.error || "Der skete en fejl ved afsendelse af formularen.")
+      }
+
+      setSubmitted(true)
       setFormData({
         creatorName: "",
         yourName: "",
@@ -34,7 +60,15 @@ export default function BlivCreatorPage() {
         description: "",
         contactInfo: "",
       })
-    }, 3000)
+
+      successTimerRef.current = window.setTimeout(() => {
+        setSubmitted(false)
+      }, 3000)
+    } catch (submitError) {
+      setError(submitError.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -49,6 +83,12 @@ export default function BlivCreatorPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className={styles.form}>
+              {error ? (
+                <div className={styles.successMessage} role="alert">
+                  <p>{error}</p>
+                </div>
+              ) : null}
+
               {/* Creator Name */}
               <div className={styles.formGroup}>
                 <label htmlFor="creatorName" className={styles.label}>
@@ -146,8 +186,8 @@ export default function BlivCreatorPage() {
               </div>
 
               {/* Submit Button */}
-              <button type="submit" className={styles.submitBtn}>
-                Send ansøgning
+              <button type="submit" className={styles.submitBtn} disabled={loading}>
+                {loading ? "Sender..." : "Send ansøgning"}
               </button>
             </form>
           )}

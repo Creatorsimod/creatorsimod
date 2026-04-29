@@ -1,42 +1,50 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useSyncExternalStore } from "react"
 import Link from "next/link"
 import styles from "./cookieBanner.module.css"
 
 const STORAGE_KEY = "creatorsimod-cookie-consent"
 
-export default function CookieBanner() {
-  const [visible, setVisible] = useState(false)
-  const [mounted, setMounted] = useState(false)
-  const [hasConsent, setHasConsent] = useState(false)
+function subscribe(callback) {
+  window.addEventListener("storage", callback)
+  window.addEventListener("creatorsimod-cookie-consent-change", callback)
 
-  useEffect(() => {
-    const savedConsent = window.localStorage.getItem(STORAGE_KEY)
-    const accepted = savedConsent === "accepted"
-    setHasConsent(accepted)
-    setVisible(!accepted)
-    setMounted(true)
-  }, [])
+  return () => {
+    window.removeEventListener("storage", callback)
+    window.removeEventListener("creatorsimod-cookie-consent-change", callback)
+  }
+}
+
+function getSnapshot() {
+  return window.localStorage.getItem(STORAGE_KEY) === "accepted"
+}
+
+function getServerSnapshot() {
+  return false
+}
+
+function notifyConsentChange() {
+  window.dispatchEvent(new Event("creatorsimod-cookie-consent-change"))
+}
+
+export default function CookieBanner() {
+  const hasConsent = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+  const visible = !hasConsent
 
   const acceptCookies = () => {
     window.localStorage.setItem(STORAGE_KEY, "accepted")
-    setHasConsent(true)
-    setVisible(false)
+    notifyConsentChange()
   }
 
   const withdrawConsent = () => {
     window.localStorage.removeItem(STORAGE_KEY)
-    setHasConsent(false)
-    setVisible(true)
+    notifyConsentChange()
   }
 
   const openCookieSettings = () => {
-    setVisible(true)
-  }
-
-  if (!mounted) {
-    return null
+    window.localStorage.removeItem(STORAGE_KEY)
+    notifyConsentChange()
   }
 
   return (
