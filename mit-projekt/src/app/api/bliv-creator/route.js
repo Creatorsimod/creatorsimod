@@ -24,6 +24,23 @@ export async function POST(request) {
       )
     }
 
+    const recipient = process.env.RESEND_TO_EMAIL
+    const fromEmail = process.env.RESEND_FROM_EMAIL
+
+    if (!recipient) {
+      return Response.json(
+        { error: "RESEND_TO_EMAIL mangler i miljøvariablerne." },
+        { status: 500 },
+      )
+    }
+
+    if (!fromEmail) {
+      return Response.json(
+        { error: "RESEND_FROM_EMAIL mangler i miljøvariablerne." },
+        { status: 500 },
+      )
+    }
+
     const body = await request.json()
     const creatorName = body?.creatorName?.trim()
     const yourName = body?.yourName?.trim()
@@ -36,19 +53,6 @@ export async function POST(request) {
     }
 
     const contactIsEmail = emailPattern.test(contactInfo)
-    const recipient = process.env.RESEND_TO_EMAIL || (contactIsEmail ? contactInfo : null)
-
-    if (!recipient) {
-      return Response.json(
-        {
-          error:
-            "Sæt RESEND_TO_EMAIL i din .env.local, eller brug en email i kontaktfeltet for test.",
-        },
-        { status: 400 },
-      )
-    }
-
-    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev"
 
     const html = `
       <h2>Ny Bliv Creator ansøgning</h2>
