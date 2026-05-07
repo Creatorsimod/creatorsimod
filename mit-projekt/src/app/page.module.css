@@ -234,3 +234,142 @@
     font-size: 0.85rem;
   }
 }
+
+/* Carousel Styles */
+.carouselContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.carouselGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  animation: slideIn 0.6s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.carouselItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeInUp 0.8s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carouselControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.carouselButton {
+  background: #b95d18;
+  color: #efe9db;
+  border: none;
+  padding: 10px 16px;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.carouselButton:hover {
+  background: #a34f15;
+  transform: scale(1.05);
+}
+
+.carouselButton:active {
+  transform: scale(0.95);
+}
+
+.carouselIndicators {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #d4c5b0;
+  border: 2px solid #999;
+  cursor: pointer;
+  transition: all 200ms ease;
+  padding: 0;
+}
+
+.indicator.active {
+  background: #b95d18;
+  border-color: #b95d18;
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: #c9a871;
+}
+
+/* Carousel Responsive */
+@media (max-width: 1024px) {
+  .carouselGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .carouselGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .carouselContainer {
+    gap: 16px;
+  }
+
+  .carouselControls {
+    gap: 16px;
+  }
+
+  .carouselButton {
+    padding: 8px 12px;
+    font-size: 1rem;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+}

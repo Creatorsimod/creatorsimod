@@ -1,5 +1,6 @@
 import Link from "next/link"
 import styles from "./page.module.css"
+import CreatorsCarousel from "./components/CreatorsCarousel"
 
 export const revalidate = 60
 
@@ -325,35 +326,7 @@ export default async function Home() {
           <p className={styles.sectionSubtitle}>Her kan du se hvilke creators der støtter projektet</p>
 
           {creatorsProjects.length ? (
-            <div className={styles.grid}>
-              {creatorsProjects.map((project) => (
-                <div key={project.id} className={styles.gridItem}>
-                  <div
-                    className={styles.imagePlaceholder}
-                    style={
-                      project.image
-                        ? {
-                            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.18)), url(${project.image})`,
-                            backgroundSize: "contain",
-                            backgroundPosition: "center",
-                            backgroundRepeat: "no-repeat",
-                            backgroundColor: "#d4c5b0",
-                          }
-                        : undefined
-                    }
-                  />
-                  <div className={styles.itemLabel}>
-                    <span className={styles.itemTitle}>{project.title}</span>
-                    <span className={styles.itemCategory}>{project.category}</span>
-                    {project.richText ? (
-                      <div className={styles.itemRichText}>
-                        {renderRichText(project.richText)}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <CreatorsCarousel projects={creatorsProjects} />
           ) : (
             <p className={styles.sectionSubtitle}>
               Der er endnu ingen creators i Contentful, eller også mangler forbindelsen til space’et.
