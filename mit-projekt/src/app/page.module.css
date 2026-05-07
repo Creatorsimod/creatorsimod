@@ -373,3 +373,169 @@
     height: 10px;
   }
 }
+
+/* Team Section */
+.teamSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+
+.teamMemberCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 350px;
+  width: 100%;
+}
+
+.teamMemberImage {
+  width: 240px;
+  height: 240px;
+  border-radius: 12px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.teamMemberName {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+}
+
+.teamMemberRole {
+  font-size: 1rem;
+  color: #b95d18;
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.teamMemberLinks {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background: #b95d18;
+  color: #efe9db;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: all 200ms ease;
+  font-weight: 500;
+}
+
+.socialLink:hover {
+  background: #a34f15;
+  transform: translateY(-2px);
+}
+
+.bioToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: none;
+  border: 2px solid #b95d18;
+  color: #b95d18;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.bioToggle:hover {
+  background: #b95d18;
+  color: #efe9db;
+}
+
+.bioContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease-in-out;
+  margin-top: 12px;
+}
+
+.bioContent.expanded {
+  max-height: 500px;
+}
+
+.bioText {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #3b3a36;
+  text-align: left;
+  padding: 12px;
+  background: rgba(185, 93, 24, 0.05);
+  border-left: 4px solid #b95d18;
+  border-radius: 4px;
+}
+
+/* Team Section Responsive */
+@media (max-width: 1024px) {
+  .teamSection {
+    padding: 60px 32px;
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .teamMemberImage {
+    width: 200px;
+    height: 200px;
+  }
+
+  .teamMemberName {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .teamSection {
+    padding: 48px 20px;
+  }
+
+  .teamGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .teamMemberImage {
+    width: 180px;
+    height: 180px;
+  }
+
+  .teamMemberName {
+    font-size: 1.1rem;
+  }
+
+  .teamMemberRole {
+    font-size: 0.9rem;
+  }
+
+  .bioToggle {
+    width: 100%;
+  }
+}

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import styles from "./page.module.css"
 import CreatorsCarousel from "./components/CreatorsCarousel"
+import TeamMember from "./components/TeamMember"
 
 export const revalidate = 60
 
@@ -319,7 +320,34 @@ export default async function Home() {
             Bliv en del af projektet
           </Link>
         </section>
+        {/* Team Section */}
+        <section className={styles.teamSection}>
+          <h2 className={styles.sectionTitle}>Teamet bag</h2>
+          <p className={styles.sectionSubtitle}>Vi har følgende 2 medlemmer end til videre</p>
 
+          <div className={styles.teamGrid}>
+            <TeamMember
+              name="Annepane"
+              role="Founder"
+              image="/annepane.jfif"
+              links={[
+                { label: "Twitch", url: "https://www.twitch.tv/annepane" },
+                { label: "Instagram", url: "https://www.instagram.com/annepanetv/" },
+              ]}
+              bio="Annepane er en dansk Twitch-streamer og content creator med fokus på gaming, cosplay og hyggelige fællesskaber. Hun er kendt for sine CS-streams og positive energi, hvor tryghed, respekt og god stemning er i centrum. Gennem projektet 'Creators imod Mobning' arbejder hun for at skabe et mere inkluderende online community, hvor alle kan føle sig velkomne."
+            />
+            <TeamMember
+              name="Mortenrwinther"
+              role="Webudvikler & Partner"
+              image="/mortenrwinther.png"
+              links={[
+                { label: "Twitch", url: "https://www.twitch.tv/mortenrwinther" },
+                { label: "YouTube", url: "https://www.youtube.com/@mortenrwinther" },
+              ]}
+              bio="Mortenrwinther er en dansk content creator og Twitch-streamer med fokus på gaming, underholdning og et stærkt online fællesskab. Med en passion for at samle mennesker gennem positiv energi og autentisk content arbejder han aktivt for at skabe et trygt miljø på nettet. Som en del af 'Creators imod Mobning' er hans mål at sætte fokus på respekt, fællesskab og at bekæmpe mobning i online verdenen."
+            />
+          </div>
+        </section>
         {/* Creators Section */}
         <section className={styles.creatorsSection}>
           <h2 className={styles.sectionTitle}>Creators</h2>
