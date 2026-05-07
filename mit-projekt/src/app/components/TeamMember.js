@@ -12,8 +12,8 @@ export default function TeamMember({ name, role, image, links, bio }) {
       <Image
         src={image}
         alt={name}
-        width={240}
-        height={240}
+        width={380}
+        height={380}
         className={styles.teamMemberImage}
       />
       <h3 className={styles.teamMemberName}>{name}</h3>
