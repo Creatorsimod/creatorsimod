@@ -329,7 +329,7 @@ export default async function Home() {
             <TeamMember
               name="Annepane"
               role="Founder"
-              image="/annepane.jfif"
+              image="/annepane.jpg"
               links={[
                 { label: "Twitch", url: "https://www.twitch.tv/annepane" },
                 { label: "Instagram", url: "https://www.instagram.com/annepanetv/" },
