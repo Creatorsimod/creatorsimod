@@ -43,7 +43,7 @@ export default function OmOsPage() {
         {/* Team Section (same as on frontpage) */}
         <section className={styles.teamSection}>
           <h2 className={styles.sectionTitle}>Teamet bag</h2>
-          <p className={styles.sectionSubtitle}>Vi har følgende 2 medlemmer end til videre</p>
+          <p className={styles.sectionSubtitle}>Vi har følgende 2 medlemmer indtil videre</p>
 
           <div className={styles.teamGrid}>
             <TeamMember
