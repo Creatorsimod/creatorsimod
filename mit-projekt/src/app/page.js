@@ -6,7 +6,7 @@ import TeamMember from "./components/TeamMember"
 export const revalidate = 60
 
 export const metadata = {
-  title: "Forside",
+  title: "Forside | Creators imod mobning",
   description:
     "Creators imod mobning samler danske creators for at skabe opmærksomhed og handling mod mobning online, i skolen og på arbejdspladsen.",
   alternates: {
@@ -334,7 +334,7 @@ export default async function Home() {
                 { label: "Twitch", url: "https://www.twitch.tv/annepane" },
                 { label: "Instagram", url: "https://www.instagram.com/annepanetv/" },
               ]}
-              bio="Annepane er en dansk Twitch-streamer og content creator med fokus på gaming, cosplay og hyggelige fællesskaber. Hun er kendt for sine CS-streams og positive energi, hvor tryghed, respekt og god stemning er i centrum. Gennem projektet 'Creators imod Mobning' arbejder hun for at skabe et mere inkluderende online community, hvor alle kan føle sig velkomne."
+              bio="Annepane er en dansk Twitch-streamer og content creator med fokus på gaming, cosplay og hyggelige fællesskaber. Hun er kendt for sine flødebolle streams og positive energi, hvor tryghed, respekt og god stemning er i centrum. Gennem projektet 'Creators imod Mobning' arbejder hun for at skabe et mere inkluderende online community, hvor alle kan føle sig velkomne."
             />
             <TeamMember
               name="Mortenrwinther"

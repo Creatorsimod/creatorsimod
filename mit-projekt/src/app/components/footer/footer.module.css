@@ -18,14 +18,47 @@
 /* Logo Section */
 .logoSection {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 16px;
 }
 
 .logo {
   width: 180px;
   height: auto;
   filter: brightness(1.1);
+}
+
+/* Social Links */
+.socialSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 12px;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: transparent;
+  color: #3b3a36;
+  border: 1px solid rgba(59,58,54,0.06);
+  transition: background-color 180ms ease, color 180ms ease, transform 120ms ease;
+}
+
+.socialLink:hover {
+  background: #b95d18;
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 /* Discord Section */

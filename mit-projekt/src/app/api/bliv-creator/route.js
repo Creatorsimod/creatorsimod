@@ -41,12 +41,38 @@ export async function POST(request) {
       )
     }
 
-    const body = await request.json()
-    const creatorName = body?.creatorName?.trim()
-    const yourName = body?.yourName?.trim()
-    const platform = body?.platform?.trim()
-    const description = body?.description?.trim()
-    const contactInfo = body?.contactInfo?.trim()
+    // Support both JSON and multipart/form-data (for image upload)
+    let creatorName, yourName, platform, description, contactInfo
+    let attachment
+
+    const contentType = request.headers.get("content-type") || ""
+
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await request.formData()
+      creatorName = String(formData.get("creatorName") || "").trim()
+      yourName = String(formData.get("yourName") || "").trim()
+      platform = String(formData.get("platform") || "").trim()
+      description = String(formData.get("description") || "").trim()
+      contactInfo = String(formData.get("contactInfo") || "").trim()
+
+      const file = formData.get("image")
+      if (file && file.size) {
+        const arrayBuffer = await file.arrayBuffer()
+        const buffer = Buffer.from(arrayBuffer)
+        attachment = {
+          filename: file.name || "image.jpg",
+          content: buffer.toString("base64"),
+          type: file.type || "application/octet-stream",
+        }
+      }
+    } else {
+      const body = await request.json()
+      creatorName = body?.creatorName?.trim()
+      yourName = body?.yourName?.trim()
+      platform = body?.platform?.trim()
+      description = body?.description?.trim()
+      contactInfo = body?.contactInfo?.trim()
+    }
 
     if (!creatorName || !yourName || !platform || !description || !contactInfo) {
       return Response.json({ error: "Udfyld venligst alle felter." }, { status: 400 })
@@ -54,7 +80,7 @@ export async function POST(request) {
 
     const contactIsEmail = emailPattern.test(contactInfo)
 
-    const html = `
+    let html = `
       <h2>Ny Bliv Creator ansøgning</h2>
       <p><strong>Creator navn:</strong> ${escapeHtml(creatorName)}</p>
       <p><strong>Dit navn:</strong> ${escapeHtml(yourName)}</p>
@@ -64,7 +90,11 @@ export async function POST(request) {
       <p>${escapeHtml(description).replaceAll("\n", "<br />")}</p>
     `
 
-    const { error } = await resend.emails.send({
+    if (attachment) {
+      html += `<p><strong>Billede vedhæftet:</strong> ${escapeHtml(attachment.filename)}</p>`
+    }
+
+    const emailOptions = {
       from: fromEmail,
       to: [recipient],
       subject: `Ny Bliv Creator ansøgning fra ${creatorName}`,
@@ -78,7 +108,19 @@ export async function POST(request) {
         `Beskrivelse: ${description}`,
       ].join("\n"),
       replyTo: contactIsEmail ? contactInfo : undefined,
-    })
+    }
+
+    if (attachment) {
+      emailOptions.attachments = [
+        {
+          filename: attachment.filename,
+          content: attachment.content,
+          type: attachment.type,
+        },
+      ]
+    }
+
+    const { error } = await resend.emails.send(emailOptions)
 
     if (error) {
       return Response.json({ error: error.message }, { status: 500 })

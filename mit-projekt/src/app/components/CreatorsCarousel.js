@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from '../page.module.css'
 
 function renderRichText(value) {
@@ -127,6 +127,7 @@ export default function CreatorsCarousel({ projects }) {
   const [mounted, setMounted] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsPerPage, setItemsPerPage] = useState(3)
+  const lastInteractionRef = useRef(Date.now())
 
   // Prevent hydration mismatch
   useEffect(() => {
@@ -153,13 +154,20 @@ export default function CreatorsCarousel({ projects }) {
      return () => window.removeEventListener('resize', handleResize)
    }, [mounted])
 
-   // Auto-rotate carousel - changes every 6 seconds
+   // Auto-rotate carousel - changes every 10 seconds, but only after 10 seconds of inactivity
    useEffect(() => {
      if (!mounted || !projects || projects.length === 0) return
 
      const timer = setInterval(() => {
+       const elapsed = Date.now() - lastInteractionRef.current
+
+       if (elapsed < 10000) {
+         return
+       }
+
+       lastInteractionRef.current = Date.now()
        setCurrentIndex(prev => (prev + itemsPerPage) % projects.length)
-     }, 6000)
+     }, 1000)
 
      return () => clearInterval(timer)
    }, [mounted, projects, itemsPerPage])
@@ -214,7 +222,10 @@ export default function CreatorsCarousel({ projects }) {
       <div className={styles.carouselControls}>
         <button
           className={styles.carouselButton}
-          onClick={() => setCurrentIndex(prev => (prev - itemsPerPage + projects.length) % projects.length)}
+          onClick={() => {
+            lastInteractionRef.current = Date.now()
+            setCurrentIndex(prev => (prev - itemsPerPage + projects.length) % projects.length)
+          }}
           aria-label="Forrige creators"
         >
           ←
@@ -225,7 +236,10 @@ export default function CreatorsCarousel({ projects }) {
             <button
               key={index}
               className={`${styles.indicator} ${(currentIndex / itemsPerPage) === index ? styles.active : ""}`}
-              onClick={() => setCurrentIndex((index * itemsPerPage) % projects.length)}
+              onClick={() => {
+                lastInteractionRef.current = Date.now()
+                setCurrentIndex((index * itemsPerPage) % projects.length)
+              }}
               aria-label={`Gå til gruppe ${index + 1}`}
             />
           ))}
@@ -233,7 +247,10 @@ export default function CreatorsCarousel({ projects }) {
 
         <button
           className={styles.carouselButton}
-          onClick={() => setCurrentIndex(prev => (prev + itemsPerPage) % projects.length)}
+          onClick={() => {
+            lastInteractionRef.current = Date.now()
+            setCurrentIndex(prev => (prev + itemsPerPage) % projects.length)
+          }}
           aria-label="Næste creators"
         >
           →

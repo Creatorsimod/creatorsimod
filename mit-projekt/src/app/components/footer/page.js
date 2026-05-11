@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        {/* Logo Section */}
+        {/* Logo Section + Social Links */}
         <div className={styles.logoSection}>
           <Image
             src="/mainLogo.png"
@@ -16,6 +16,52 @@ export default function Footer() {
             height={80}
             className={styles.logo}
           />
+
+          <nav className={styles.socialLinks} aria-label="Sociale medier">
+            <a
+              href="https://www.twitch.tv/creatorsimod"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              aria-label="Twitch - Creatorsimod"
+            >
+              {/* Twitch SVG */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 3L4 15L8 15L8 19L12 19L18 13L18 3H4Z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M17 6H15V10H17V6Z" fill="currentColor"/>
+                <path d="M13 6H11V10H13V6Z" fill="currentColor"/>
+              </svg>
+            </a>
+
+            <a
+              href="https://www.instagram.com/creatorsimod/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              aria-label="Instagram - Creatorsimod"
+            >
+              {/* Instagram SVG */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.2"/>
+                <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor"/>
+              </svg>
+            </a>
+
+            <a
+              href="https://www.youtube.com/@CreatorsImod"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              aria-label="YouTube - Creatorsimod"
+            >
+              {/* YouTube SVG */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="6" width="20" height="12" rx="3" stroke="currentColor" strokeWidth="1.2"/>
+                <path d="M10 9.5L15 12L10 14.5V9.5Z" fill="currentColor"/>
+              </svg>
+            </a>
+          </nav>
         </div>
 
         {/* Discord Widget Section */}

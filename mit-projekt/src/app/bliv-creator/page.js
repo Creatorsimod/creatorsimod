@@ -13,7 +13,9 @@ export default function BlivCreatorPage() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [imageFile, setImageFile] = useState(null)
   const successTimerRef = useRef(null)
+  const fileInputRef = useRef(null)
 
   useEffect(() => {
     return () => {
@@ -31,6 +33,11 @@ export default function BlivCreatorPage() {
     }))
   }
 
+  const handleFileChange = (e) => {
+    const file = e.target.files && e.target.files[0]
+    setImageFile(file || null)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -38,12 +45,20 @@ export default function BlivCreatorPage() {
     setError("")
 
     try {
+      // Use FormData to allow optional image upload
+      const formDataToSend = new FormData()
+      formDataToSend.append("creatorName", formData.creatorName)
+      formDataToSend.append("yourName", formData.yourName)
+      formDataToSend.append("platform", formData.platform)
+      formDataToSend.append("description", formData.description)
+      formDataToSend.append("contactInfo", formData.contactInfo)
+      if (imageFile) {
+        formDataToSend.append("image", imageFile)
+      }
+
       const response = await fetch("/api/bliv-creator", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSend,
       })
 
       const result = await response.json().catch(() => ({}))
@@ -60,6 +75,8 @@ export default function BlivCreatorPage() {
         description: "",
         contactInfo: "",
       })
+      setImageFile(null)
+      if (fileInputRef.current) fileInputRef.current.value = ""
 
       successTimerRef.current = window.setTimeout(() => {
         setSubmitted(false)
@@ -182,6 +199,21 @@ export default function BlivCreatorPage() {
                   placeholder="discord@brugernavn eller din@email.dk"
                   required
                   className={styles.input}
+                />
+              </div>
+
+              {/* Image Upload */}
+              <div className={styles.formGroup}>
+                <label htmlFor="image" className={styles.label}>
+                  Vedhæft logo <span className={styles.required}>*</span>
+                </label>
+                <input
+                  id="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  ref={fileInputRef}
+                  className={styles.fileInput}
                 />
               </div>
 
