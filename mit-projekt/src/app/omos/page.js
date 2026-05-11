@@ -68,6 +68,25 @@ export default function OmOsPage() {
             />
           </div>
         </section>
+
+        {/* Vision Section */}
+        <section className={styles.visionMissionSection}>
+          <div className={styles.visionMissionContainer}>
+            <div className={styles.visionMissionCard}>
+              <h2 className={styles.visionMissionTitle}>Vision</h2>
+              <p className={styles.visionMissionText}>
+                At gøre folk opmærksomme på at mobning desværre er en synlig ting i vores daglige adfære, vi ser det på skoler, arbejdspladser og online. Det danner lidt vores personlige identitet og den måde vi er på online og offline. Det går ud over den næste generation.
+              </p>
+            </div>
+
+            <div className={styles.visionMissionCard}>
+              <h2 className={styles.visionMissionTitle}>Mission</h2>
+              <p className={styles.visionMissionText}>
+                At mindske mobning så meget som muligt, og hjælpe vores medmennesker på vej til hvordan vi skal behandle hinanden både offline og online. Dette gør vi ved at stille et fællesskab til rådighed, samt lave kampagner, events og indsamlinger
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   )
