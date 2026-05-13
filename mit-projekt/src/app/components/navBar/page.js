@@ -2,12 +2,13 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import styles from "./navBar.module.css"
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
   const isEnglish = pathname === "/en" || pathname.startsWith("/en/")
   const prefix = isEnglish ? "/en" : ""
   const basePath = isEnglish ? pathname.replace(/^\/en/, "") || "/" : pathname || "/"
@@ -36,9 +37,10 @@ export default function NavBar() {
         contact: "Kontakt",
       }
 
-  const setLanguageCookie = (lang) => {
+  const switchLanguage = (lang, path) => {
     document.cookie = `site-lang=${lang}; path=/; max-age=31536000; samesite=lax`
     setOpen(false)
+    router.push(path)
   }
 
   return (
@@ -81,21 +83,21 @@ export default function NavBar() {
             <Link href={toPath("/kontakt")}>{labels.contact}</Link>
           </li>
           <li className={`${styles.navItem} ${styles.languageItem}`}>
-            <Link
-              href={switchToDaPath}
+            <button
+              onClick={() => switchLanguage("da", switchToDaPath)}
               className={isEnglish ? "" : styles.activeLanguage}
-              onClick={() => setLanguageCookie("da")}
+              style={{ background: "none", border: "none", cursor: "pointer", padding: 0, font: "inherit", color: "inherit" }}
             >
               DA
-            </Link>
+            </button>
             <span className={styles.languageDivider}>/</span>
-            <Link
-              href={switchToEnPath}
+            <button
+              onClick={() => switchLanguage("en", switchToEnPath)}
               className={isEnglish ? styles.activeLanguage : ""}
-              onClick={() => setLanguageCookie("en")}
+              style={{ background: "none", border: "none", cursor: "pointer", padding: 0, font: "inherit", color: "inherit" }}
             >
               EN
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>
