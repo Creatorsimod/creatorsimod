@@ -1,9 +1,56 @@
 "use client"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import styles from "./footer.module.css"
 
 export default function Footer() {
+  const pathname = usePathname()
+  const isEnglish = pathname === "/en" || pathname.startsWith("/en/")
+  const prefix = isEnglish ? "/en" : ""
+
+  const toPath = (path) => {
+    if (!prefix) return path
+    if (path === "/") return prefix
+    return `${prefix}${path}`
+  }
+
+  const t = isEnglish
+    ? {
+        socialLabel: "Social media",
+        joinDiscord: "Join us on Discord",
+        legal: "Legal",
+        privacy: "Privacy policy",
+        cookies: "Cookie policy",
+        terms: "Terms and conditions",
+        gdpr: "GDPR & Sensitive data",
+        about: "About",
+        home: "Home",
+        aboutCreators: "About Creators against bullying",
+        becomeCreator: "Become a Creator",
+        contact: "Contact",
+        copyright: "Creators against bullying. All rights reserved.",
+        compliancePrefix: "We use cookies to improve your experience. By continuing, you accept our",
+        complianceLink: "cookie policy",
+      }
+    : {
+        socialLabel: "Sociale medier",
+        joinDiscord: "Tilslut os pa Discord",
+        legal: "Juridisk",
+        privacy: "Privatlivspolitik",
+        cookies: "Cookiepolitik",
+        terms: "Handelsbetingelser",
+        gdpr: "GDPR & Personfolsomdata",
+        about: "Om os",
+        home: "Forside",
+        aboutCreators: "Om Creators against bullying",
+        becomeCreator: "Bliv Creator",
+        contact: "Kontakt",
+        copyright: "Creators against bullying. Alle rettigheder forbeholdt.",
+        compliancePrefix: "Vi anvender cookies til at forbedre din oplevelse. Ved at fortsaette godkender du vores",
+        complianceLink: "cookiepolitik",
+      }
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -11,13 +58,13 @@ export default function Footer() {
         <div className={styles.logoSection}>
           <Image
             src="/mainLogo.png"
-            alt="Creators imod mobning"
+            alt="Creators against bullying logo"
             width={160}
             height={80}
             className={styles.logo}
           />
 
-          <nav className={styles.socialLinks} aria-label="Sociale medier">
+          <nav className={styles.socialLinks} aria-label={t.socialLabel}>
             <a
               href="https://www.twitch.tv/creatorsimod"
               target="_blank"
@@ -66,7 +113,7 @@ export default function Footer() {
 
         {/* Discord Widget Section */}
         <div className={styles.discordSection}>
-          <h3 className={styles.discordTitle}>Tilslut os på Discord</h3>
+          <h3 className={styles.discordTitle}>{t.joinDiscord}</h3>
           <div className={styles.discordWidget}>
             <iframe
               src="https://discord.com/widget?id=1490642776466133072&theme=dark"
@@ -83,37 +130,37 @@ export default function Footer() {
         {/* Legal Links Section */}
         <div className={styles.legalSection}>
           <div className={styles.legalColumn}>
-            <h3 className={styles.legalTitle}>Juridisk</h3>
+            <h3 className={styles.legalTitle}>{t.legal}</h3>
             <nav className={styles.legalLinks}>
-              <Link href="/privatlivspolitik" className={styles.legalLink}>
-                Privatlivspolitik
+              <Link href={toPath("/privatlivspolitik")} className={styles.legalLink}>
+                {t.privacy}
               </Link>
-              <Link href="/cookiepolitik" className={styles.legalLink}>
-                Cookiepolitik
+              <Link href={toPath("/cookiepolitik")} className={styles.legalLink}>
+                {t.cookies}
               </Link>
-              <Link href="/handelsbetingelser" className={styles.legalLink}>
-                Handelsbetingelser
+              <Link href={toPath("/handelsbetingelser")} className={styles.legalLink}>
+                {t.terms}
               </Link>
-              <Link href="/gdpr" className={styles.legalLink}>
-                GDPR & Personfølsomdata
+              <Link href={toPath("/gdpr")} className={styles.legalLink}>
+                {t.gdpr}
               </Link>
             </nav>
           </div>
 
           <div className={styles.legalColumn}>
-            <h3 className={styles.legalTitle}>Om os</h3>
+            <h3 className={styles.legalTitle}>{t.about}</h3>
             <nav className={styles.legalLinks}>
-              <Link href="/" className={styles.legalLink}>
-                Forside
+              <Link href={toPath("/")} className={styles.legalLink}>
+                {t.home}
               </Link>
-              <Link href="/om-os" className={styles.legalLink}>
-                Om Creators imod
+              <Link href={toPath("/om-os")} className={styles.legalLink}>
+                {t.aboutCreators}
               </Link>
-              <Link href="/bliv-creator" className={styles.legalLink}>
-                Bliv Creator
+              <Link href={toPath("/bliv-creator")} className={styles.legalLink}>
+                {t.becomeCreator}
               </Link>
-              <Link href="/kontakt" className={styles.legalLink}>
-                Kontakt
+              <Link href={toPath("/kontakt")} className={styles.legalLink}>
+                {t.contact}
               </Link>
             </nav>
           </div>
@@ -123,12 +170,12 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className={styles.bottom}>
         <p className={styles.copyright}>
-          © {new Date().getFullYear()} Creators imod mobning. Alle rettigheder forbeholdt.
+          © {new Date().getFullYear()} {t.copyright}
         </p>
         <p className={styles.compliance}>
-          VI anvender cookies til at forbedre din oplevelse. Ved at fortsætte godkender du vores{" "}
-          <Link href="/cookiepolitik" className={styles.complianceLink}>
-            cookiepolitik
+          {t.compliancePrefix}{" "}
+          <Link href={toPath("/cookiepolitik")} className={styles.complianceLink}>
+            {t.complianceLink}
           </Link>
           .
         </p>

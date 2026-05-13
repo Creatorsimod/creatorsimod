@@ -66,6 +66,23 @@
   color: var(--muted);
 }
 
+.languageItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.languageDivider {
+  color: var(--muted);
+  user-select: none;
+}
+
+.activeLanguage {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 700;
+}
+
 .burger {
   display: none;
   position: absolute;
@@ -111,6 +128,11 @@
     width: 100%;
     text-align: center;
     padding: 0;
+  }
+
+  .languageItem {
+    justify-content: center;
+    padding: 16px 0;
   }
 
   .navItem a {

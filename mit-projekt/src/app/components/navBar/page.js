@@ -2,15 +2,50 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import styles from "./navBar.module.css"
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+  const isEnglish = pathname === "/en" || pathname.startsWith("/en/")
+  const prefix = isEnglish ? "/en" : ""
+  const basePath = isEnglish ? pathname.replace(/^\/en/, "") || "/" : pathname || "/"
+  const switchToDaPath = isEnglish ? basePath : pathname || "/"
+  const switchToEnPath = isEnglish ? pathname : basePath === "/" ? "/en" : `/en${basePath}`
+
+  const toPath = (path) => {
+    if (!prefix) return path
+    if (path === "/") return prefix
+    return `${prefix}${path}`
+  }
+
+  const labels = isEnglish
+    ? {
+        menu: "Menu",
+        home: "Home",
+        about: "About",
+        becomeCreator: "Become a Creator",
+        contact: "Contact",
+      }
+    : {
+        menu: "Menu",
+        home: "Forside",
+        about: "Om os",
+        becomeCreator: "Bliv Creator",
+        contact: "Kontakt",
+      }
+
+  const setLanguageCookie = (lang) => {
+    document.cookie = `site-lang=${lang}; path=/; max-age=31536000; samesite=lax`
+    setOpen(false)
+  }
+
   return (
     <header className={styles.header}>
       <nav className={styles.navContainer}>
         <div className={styles.brand}>
-          <Link href="/">
+          <Link href={toPath("/")}>
             <Image
               src="/mainLogo.png"
               alt="CreatorSiMod"
@@ -23,7 +58,7 @@ export default function NavBar() {
 
         <button
           className={styles.burger}
-          aria-label="Menu"
+          aria-label={labels.menu}
           aria-expanded={open}
           onClick={() => setOpen((s) => !s)}
         >
@@ -34,16 +69,33 @@ export default function NavBar() {
 
         <ul className={`${styles.navList} ${open ? styles.open : ""}`}>
           <li className={styles.navItem}>
-            <Link href="/">Forside</Link>
+            <Link href={toPath("/")}>{labels.home}</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/om-os">Om os</Link>
+            <Link href={toPath("/om-os")}>{labels.about}</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/bliv-creator">Bliv Creator</Link>
+            <Link href={toPath("/bliv-creator")}>{labels.becomeCreator}</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/kontakt">Kontakt</Link>
+            <Link href={toPath("/kontakt")}>{labels.contact}</Link>
+          </li>
+          <li className={`${styles.navItem} ${styles.languageItem}`}>
+            <Link
+              href={switchToDaPath}
+              className={isEnglish ? "" : styles.activeLanguage}
+              onClick={() => setLanguageCookie("da")}
+            >
+              DA
+            </Link>
+            <span className={styles.languageDivider}>/</span>
+            <Link
+              href={switchToEnPath}
+              className={isEnglish ? styles.activeLanguage : ""}
+              onClick={() => setLanguageCookie("en")}
+            >
+              EN
+            </Link>
           </li>
         </ul>
       </nav>
