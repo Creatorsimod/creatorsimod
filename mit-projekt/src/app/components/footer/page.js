@@ -43,10 +43,10 @@ export default function Footer() {
         gdpr: "GDPR & Personfolsomdata",
         about: "Om os",
         home: "Forside",
-        aboutCreators: "Om Creators against bullying",
+        aboutCreators: "Om Creators imod mobning",
         becomeCreator: "Bliv Creator",
         contact: "Kontakt",
-        copyright: "Creators against bullying. Alle rettigheder forbeholdt.",
+        copyright: "Creators imod mobning. Alle rettigheder forbeholdt.",
         compliancePrefix: "Vi anvender cookies til at forbedre din oplevelse. Ved at fortsaette godkender du vores",
         complianceLink: "cookiepolitik",
       }
