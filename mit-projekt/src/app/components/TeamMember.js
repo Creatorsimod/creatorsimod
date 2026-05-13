@@ -2,10 +2,16 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import styles from "../page.module.css"
 
 export default function TeamMember({ name, role, image, links, bio }) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const pathname = usePathname()
+  const isEnglish = pathname === "/en" || pathname.startsWith("/en/")
+  const labels = isEnglish
+    ? { showMore: "Read more", hide: "Hide" }
+    : { showMore: "Laes mere", hide: "Skjul" }
 
   return (
     <div className={styles.teamMemberCard}>
@@ -37,7 +43,7 @@ export default function TeamMember({ name, role, image, links, bio }) {
         className={styles.bioToggle}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <span>{isExpanded ? "Skjul" : "Læs mere"}</span>
+        <span>{isExpanded ? labels.hide : labels.showMore}</span>
         <span>{isExpanded ? "▼" : "▶"}</span>
       </button>
 
