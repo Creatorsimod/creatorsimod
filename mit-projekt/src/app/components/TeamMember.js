@@ -11,7 +11,7 @@ export default function TeamMember({ name, role, image, links, bio }) {
   const isEnglish = pathname === "/en" || pathname.startsWith("/en/")
   const labels = isEnglish
     ? { showMore: "Read more", hide: "Hide" }
-    : { showMore: "Laes mere", hide: "Skjul" }
+    : { showMore: "Læs mere", hide: "Skjul" }
 
   return (
     <div className={styles.teamMemberCard}>
