@@ -142,9 +142,16 @@
     line-height: 1.2;
   }
 
+  .languageItem button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    min-width: 44px;
+    text-align: center;
+  }
+
   .burger { display: block; }
 
-  .open { max-height: 240px; }
+  .open { max-height: 320px; }
 }
 
 /* Desktop spacing/tweak for centering like the image */

@@ -7,6 +7,12 @@ import CookieBanner from "./components/CookieBanner"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://creatorsimod.dk"
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+}
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
